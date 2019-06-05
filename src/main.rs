@@ -34,8 +34,8 @@ mod tests {
 	#[test]
 	fn config_nonZero_args(){
 		let mut cmd = Command::cargo_bin("clarg").unwrap();
-		cmd.assert()
-			.arg("r0d0")
+		cmd.arg("r0d0")
+			.assert()
 			.failure()
 			.stderr("Problem parsing argments: Must be in format rxdx where x > 0\n");
 	}
