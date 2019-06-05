@@ -31,4 +31,12 @@ mod tests {
 			.failure()
 			.stderr("Problem parsing arguments: No arguments provided\n");
 	}
+	#[test]
+	fn config_nonZero_args(){
+		let mut cmd = Command::cargo_bin("clarg").unwrap();
+		cmd.assert()
+			.arg("r0d0")
+			.failure()
+			.stderr("Problem parsing argments: Must be in format rxdx where x > 0\n");
+	}
 }

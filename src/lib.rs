@@ -11,7 +11,7 @@ impl Config {
 		args.next();
 		let availArgs = match args.next() {
 			Some(arg) => arg,
-			None => return Err("No args provided"),
+			None => return Err("No arguments provided"),
 		};
 		Ok(Config{arg1: 0,arg2: 0})
 	}
