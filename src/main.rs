@@ -1,8 +1,14 @@
 use std::process;
 use std::env;
+extern crate clArg;
+use clArg::Config;
+
 
 fn main() {
-    println!("Hello, wod!");
+	let config = Config::new(env::args()).unwrap_or_else(|err| {
+		eprintln!("Problem parsing arguments: {}", err);
+	    process::exit(1);
+     });
 }
 
 mod tests {
@@ -18,4 +24,11 @@ mod tests {
 		   .assert()
 		   .success();
 	}	
+	#[test]
+	fn config_empty_args(){
+		let mut cmd = Command::cargo_bin("clarg").unwrap();
+		cmd.assert()
+			.failure()
+			.stderr("Problem parsing arguments: No arguments provided\n");
+	}
 }
