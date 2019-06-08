@@ -13,6 +13,22 @@ impl Config {
 			Some(arg) => arg,
 			None => return Err("No arguments provided"),
 		};
-		Ok(Config{arg1: 0,arg2: 0})
+		let argParts: Vec<&str> = availArgs.split("d").collect();
+		if argParts.len() != 2  { 
+			return Err("Must be in the form r<rolls>s<sides>");
+		}
+		let mut argParts = argParts.iter();
+		let parseErr = "Must be in format rxdx where x > 0";
+		let r = argParts.next().unwrap().parse::<u32>();
+		let s = argParts.next().unwrap().parse::<u32>();
+		if r.is_err() || s.is_err() {
+			return Err(parseErr);
+		}
+		let r = r.unwrap();
+		let s = s.unwrap();
+		if r ==0 || s ==0 {
+			return Err(parseErr);
+		}
+		Ok(Config{arg1: r,arg2: s})
 	}
 }
